@@ -349,7 +349,7 @@ export default function App() {
             <motion.div initial={{opacity:0,y:20}} animate={{opacity:1,y:0}} transition={{delay: 0.4}} className="w-full relative z-20">
               <GlassIcons items={[
                 { icon: Brain, title: "Explainable AI Engine", desc: "15 sub-category scoring with distinct greenwash detection." },
-                { icon: Shield, title: "Polygon Immutable Ledger", desc: "Hashes stored on-chain to prevent historical report tampering." },
+                { icon: Shield, title: "Ethereum Immutable Ledger", desc: "Hashes stored on-chain to prevent historical report tampering." },
                 { icon: CheckCircle, title: "Persistent Verification", desc: "Export professional PDF scorecards instantly verified anywhere." },
               ]} />
             </motion.div>

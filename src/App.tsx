@@ -251,7 +251,7 @@ export default function App() {
       {/* Background Effect */}
       <div className="fixed inset-0 z-0 opacity-40 mix-blend-multiply pointer-events-none">
         <LiquidEther
-          colors={['#86efac', '#6ee7b7', '#34d399']}
+          colors={['#5227FF', '#FF9FFC', '#B19EEF']}
           mouseForce={15}
           cursorSize={120}
           isViscous

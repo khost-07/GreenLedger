@@ -10,6 +10,7 @@ import {
   Search, Wallet, Link2, Copy, ArrowLeft, Leaf, X, Sparkles, Scan
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import PillNav, { PillNavItem } from './components/reactbits/PillNav';
 // Ballpit removed — plain background used instead
 import { ShinyText } from './components/reactbits/ShinyText';
 import { GlassButton } from './components/reactbits/GlassButton';
@@ -270,23 +271,22 @@ export default function App() {
       </div>
 
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-black/40 backdrop-blur-xl border-b border-slate-700/50 flex justify-center">
-        <div className="w-full max-w-7xl px-8 py-4 flex items-center justify-between">
-          <button onClick={handleReset} className="flex items-center gap-2.5 group">
-            <Shield className="w-6 h-6 text-slate-100" />
-            <span className="text-xl font-extrabold text-slate-100 tracking-tight">GreenLedger</span>
-          </button>
-          <div className="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-500">
-            <button onClick={() => setPage('verify')} className="hover:text-white transition-colors">Verify Report</button>
-            <button className="hover:text-white transition-colors">Pricing</button>
-            <button onClick={() => setShowHistory(!showHistory)} className="hover:text-white transition-colors">Dashboard</button>
-          </div>
-          <div className="flex items-center gap-2">
-            {page !== 'home' && <button onClick={handleReset} className="mr-4 px-3 py-2 rounded-xl text-sm text-slate-500 hover:text-slate-100 transition-all flex items-center gap-1.5"><ArrowLeft className="w-4 h-4" /> Back</button>}
-            <GlassButton variant="dark" showArrow onClick={() => setPage('analyze')} className="px-5 py-2.5 text-sm">New Analysis</GlassButton>
-          </div>
-        </div>
-      </nav>
+      <div className="fixed top-0 left-0 right-0 z-[100] mt-4 flex justify-center">
+        <PillNav 
+          logoAlt="GreenLedger Logo"
+          activeHref={`#${page}`}
+          baseColor="#ffffff"
+          pillColor="#10b981"
+          hoveredPillTextColor="#060010"
+          items={[
+            { id: 'logo', label: 'GreenLedger', href: '#home', onClick: handleReset },
+            { id: '1', label: 'Verify Report', href: '#verify', onClick: () => setPage('verify') },
+            { id: '2', label: 'Pricing', href: '#pricing' },
+            { id: '3', label: 'Dashboard', href: '#dashboard', onClick: () => setShowHistory(!showHistory) },
+            { id: '4', label: 'New Analysis', href: '#analyze', onClick: () => setPage('analyze') },
+          ] as PillNavItem[]} 
+        />
+      </div>
 
       <input type="file" ref={fileInputRef} onChange={handleFileUpload} className="hidden" accept=".pdf" />
 
@@ -695,9 +695,9 @@ function BlockchainPanel({ hash, companyName, greenScore, grade, ipfsCid, onDown
 
         {ipfsCid && (
           <div className="glass rounded-2xl p-6 border-l-4 border-blue-400 flex flex-col justify-center">
-            <p className="text-lg font-black text-blue-600 flex items-center gap-2 mb-2"><Database className="w-5 h-5" /> Stored on IPFS</p>
+            <p className="text-lg font-black text-blue-400 flex items-center gap-2 mb-2"><Database className="w-5 h-5" /> Stored on IPFS</p>
             <code className="text-sm font-mono break-all text-slate-500">{ipfsCid}</code>
-            <a href={`https://gateway.pinata.cloud/ipfs/${ipfsCid}`} target="_blank" rel="noreferrer" className="mt-4 block text-center py-2 rounded-xl glass text-blue-700 text-sm font-bold hover:bg-blue-50/60 transition-all">View PDF ↗</a>
+            <a href={`https://gateway.pinata.cloud/ipfs/${ipfsCid}`} target="_blank" rel="noreferrer" className="mt-4 block text-center py-2 rounded-xl bg-blue-500/10 border border-blue-500/30 text-blue-400 text-sm font-bold hover:bg-blue-500/20 transition-all">View PDF ↗</a>
           </div>
         )}
       </div>
@@ -826,12 +826,14 @@ function VerifyPage() {
             <motion.div initial={{opacity:0,y:20}} animate={{opacity:1,y:0}} transition={{delay: 0.1}}>
               <div onClick={() => fileRef.current?.click()} className="cursor-pointer group">
                 <GlassSurface className="w-full hover:border-emerald/30 shadow-lg">
-<div className="p-16 text-center transition-all w-full">
-                  <Search className="w-16 h-16 text-emerald mx-auto mb-6 group-hover:scale-110 transition-transform" />
-                  <p className="font-bold text-slate-100 text-2xl mb-2">Upload PDF to verify</p>
-                  <p className="text-base text-slate-500">We'll compute its SHA-256 hash and check against the blockchain + IPFS</p>
-                </div>
-</GlassSurface>
+                  <div className="p-16 flex flex-col items-center justify-center text-center transition-all w-full">
+                    <Search className="w-16 h-16 text-emerald mb-6 mx-auto group-hover:scale-110 transition-transform" />
+                    <div>
+                      <p className="font-bold text-slate-100 text-2xl mb-2">Upload PDF to verify</p>
+                      <p className="text-base text-slate-500">We'll compute its SHA-256 hash and check against the blockchain + IPFS</p>
+                    </div>
+                  </div>
+                </GlassSurface>
               </div>
               {error && (
                 <div className="mt-6 glass rounded-2xl p-4 border-l-4 border-rose">
@@ -861,15 +863,15 @@ function VerifyPage() {
 <div className="p-8 flex flex-col items-center w-full">
                 <div className="mb-6 w-full">
                   <p className="text-[11px] font-bold text-slate-500 uppercase tracking-widest mb-2">Document Hash (SHA-256)</p>
-                  <code className="text-sm font-mono break-all block p-4 rounded-2xl glass text-slate-500">{hash}</code>
+                  <code className="text-sm font-mono break-all block p-4 rounded-2xl bg-slate-800/80 border border-slate-700 text-slate-300">{hash}</code>
                 </div>
-                <div className="glass rounded-2xl p-6 border-l-4 border-amber w-full">
+                <div className="bg-amber-900/20 backdrop-blur-md rounded-2xl p-6 border-l-4 border-amber w-full">
                   <p className="font-bold text-amber text-lg mb-1">⚠ No Record Found</p>
                   <p className="text-base text-slate-500">This document ({fileName}) has no verified on-chain or IPFS presence.</p>
                 </div>
               </div>
 </GlassSurface>
-              <button onClick={reset} className="w-full py-4 rounded-2xl glass text-slate-500 text-base font-bold hover:bg-black/60 hover:shadow-md transition-all">
+              <button onClick={reset} className="w-full mt-6 py-4 rounded-2xl bg-slate-800/80 border border-slate-700 text-slate-300 text-base font-bold hover:bg-slate-700/80 hover:text-white transition-all shadow-md">
                 Try Another File
               </button>
             </motion.div>
@@ -894,7 +896,7 @@ function VerifyPage() {
                 
                 <div className="mb-8">
                   <p className="text-[11px] font-bold text-slate-500 uppercase tracking-widest mb-2">Document Hash (SHA-256)</p>
-                  <code className="text-sm font-mono break-all block p-4 rounded-2xl glass text-slate-500">{hash}</code>
+                  <code className="text-sm font-mono break-all block p-4 rounded-2xl bg-slate-800/80 border border-slate-700 text-slate-300">{hash}</code>
                 </div>
                 
                 {report && (
@@ -923,15 +925,15 @@ function VerifyPage() {
                 )}
 
                 {ipfsInfo && (
-                  <div className="mb-8 glass rounded-2xl p-6 border-l-4 border-blue-400">
-                    <p className="text-lg font-black text-blue-600 flex items-center gap-2 mb-4"><Database className="w-5 h-5" /> IPFS Record</p>
-                    <p className="text-[11px] font-bold text-slate-500 uppercase tracking-widest mb-2">IPFS CID</p>
-                    <code className="text-sm font-mono break-all block p-3 rounded-xl glass text-slate-500 font-bold">{ipfsInfo.ipfsCid}</code>
+                  <div className="mb-8 bg-slate-900/60 backdrop-blur-md rounded-2xl p-6 border-l-4 border-blue-500 shadow-lg">
+                    <p className="text-lg font-black text-blue-400 flex items-center gap-2 mb-4"><Database className="w-5 h-5" /> IPFS Record</p>
+                    <p className="text-[11px] font-bold text-slate-400 uppercase tracking-widest mb-2">IPFS CID</p>
+                    <code className="text-sm font-mono break-all block p-3 rounded-xl bg-slate-800/80 border border-slate-700 text-slate-300 font-bold">{ipfsInfo.ipfsCid}</code>
                     <div className="grid grid-cols-2 gap-4 mt-4 mb-4">
-                      <div className="glass rounded-xl p-3"><p className="text-xs font-bold text-slate-500 mb-1">File Name</p><p className="text-sm font-bold text-slate-100 truncate">{ipfsInfo.fileName}</p></div>
-                      <div className="glass rounded-xl p-3"><p className="text-xs font-bold text-slate-500 mb-1">File Size</p><p className="text-sm font-bold text-slate-100">{(ipfsInfo.fileSize / 1024).toFixed(1)} KB</p></div>
+                      <div className="bg-slate-800/80 border border-slate-700 rounded-xl p-3"><p className="text-xs font-bold text-slate-500 mb-1">File Name</p><p className="text-sm font-bold text-slate-100 truncate">{ipfsInfo.fileName}</p></div>
+                      <div className="bg-slate-800/80 border border-slate-700 rounded-xl p-3"><p className="text-xs font-bold text-slate-500 mb-1">File Size</p><p className="text-sm font-bold text-slate-100">{(ipfsInfo.fileSize / 1024).toFixed(1)} KB</p></div>
                     </div>
-                    <a href={ipfsInfo.gateway} target="_blank" rel="noreferrer" className="block text-center py-3 rounded-xl glass text-blue-700 text-sm font-bold hover:bg-blue-50/60 transition-all">View PDF on IPFS Gateway ↗</a>
+                    <a href={ipfsInfo.gateway} target="_blank" rel="noreferrer" className="block text-center py-3 rounded-xl bg-blue-500/10 border border-blue-500/30 text-blue-400 text-sm font-bold hover:bg-blue-500/20 transition-all">View PDF on IPFS Gateway ↗</a>
                   </div>
                 )}
 
@@ -941,13 +943,13 @@ function VerifyPage() {
                   </a>
                 )}
                 {!report && ipfsInfo && (
-                  <div className="glass rounded-2xl p-4 border-l-4 border-amber mt-4 w-full">
+                  <div className="bg-amber-900/20 backdrop-blur-md rounded-2xl p-4 border-l-4 border-amber mt-4 w-full">
                     <p className="text-sm font-bold text-amber">⚠ This document is on IPFS but not yet stored on the blockchain. Store it via the results page after analysis.</p>
                   </div>
                 )}
               </div>
 </GlassSurface>
-              <button onClick={reset} className="w-full py-4 rounded-2xl glass text-slate-500 text-base font-bold hover:bg-black/60 hover:shadow-md transition-all">
+              <button onClick={reset} className="w-full mt-6 py-4 rounded-2xl bg-slate-800/80 border border-slate-700 text-slate-300 text-base font-bold hover:bg-slate-700/80 hover:text-white transition-all shadow-md">
                 Verify Another File
               </button>
             </motion.div>

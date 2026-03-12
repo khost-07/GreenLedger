@@ -1,6 +1,4 @@
-@import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
-
+@import 'tailwindcss';
 @theme {
   --color-emerald: #00C896;
   --color-emerald-dark: #00A87A;
@@ -52,44 +50,43 @@ body {
 
 /* Liquid Glass Utility Classes */
 .glass {
-  background: rgba(255, 255, 255, 0.55);
+  background: rgba(30, 41, 59, 0.7); /* slate-800 */
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow:
-    0 4px 30px rgba(0, 0, 0, 0.04),
-    inset 0 1px 0 rgba(255, 255, 255, 0.8),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.02);
+    0 4px 30px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2);
 }
 
 .glass-strong {
-  background: rgba(255, 255, 255, 0.72);
+  background: rgba(15, 23, 42, 0.75); /* slate-900 */
   backdrop-filter: blur(30px) saturate(200%);
   -webkit-backdrop-filter: blur(30px) saturate(200%);
-  border: 1px solid rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   box-shadow:
-    0 8px 40px rgba(0, 0, 0, 0.06),
-    inset 0 2px 0 rgba(255, 255, 255, 0.9),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.03);
+    0 8px 40px rgba(0, 0, 0, 0.3),
+    inset 0 2px 0 rgba(255, 255, 255, 0.08),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2);
 }
 
 .glass-subtle {
-  background: rgba(255, 255, 255, 0.35);
+  background: rgba(51, 65, 85, 0.4); /* slate-700 */
   backdrop-filter: blur(12px) saturate(150%);
   -webkit-backdrop-filter: blur(12px) saturate(150%);
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
 }
 
 .glass-panel {
-  background: rgba(255, 255, 255, 0.45);
+  background: rgba(30, 41, 59, 0.5); /* slate-800 */
   backdrop-filter: blur(32px) saturate(200%);
   -webkit-backdrop-filter: blur(32px) saturate(200%);
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  border-radius: 2.5rem;
-  box-shadow: 
-    0 12px 48px rgba(0, 0, 0, 0.08),
-    inset 0 2px 0 rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
 .glass-nav {

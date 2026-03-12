@@ -324,11 +324,11 @@ export default function App() {
             <motion.div initial={{opacity:0,y:20}} animate={{opacity:1,y:0}} transition={{delay: 0.2}} className="w-full max-w-4xl relative z-20">
               <GlassSurface className="md:p-14 w-full">
                 <div className="p-10 flex flex-col sm:flex-row items-center justify-center gap-8 w-full">
-                  <button onClick={() => setPage('verify')} className="flex items-center justify-center gap-4 px-12 py-5 rounded-full bg-white text-slate-900 text-lg font-extrabold hover:bg-slate-200 hover:scale-105 transition-all shadow-2xl shadow-emerald-900/10 border-2 border-slate-800 w-full sm:w-auto">
-                    Verify Document <Search className="w-6 h-6 text-emerald-400" />
+                  <button onClick={() => setPage('verify')} className="flex items-center justify-center gap-4 px-14 py-8 rounded-2xl bg-white/10 backdrop-blur-xl border border-white/20 text-white text-xl font-extrabold hover:bg-white/20 hover:scale-[1.02] transition-all shadow-2xl shadow-emerald-500/20 w-full sm:w-[320px]">
+                    Verify Document <Search className="w-7 h-7 text-emerald-400" />
                   </button>
-                  <button onClick={() => setPage('analyze')} className="flex items-center justify-center gap-4 px-12 py-5 rounded-full bg-slate-900 border-2 border-emerald-500 text-emerald-900 text-lg font-extrabold hover:bg-emerald-50 hover:shadow-emerald-500/20 hover:scale-105 transition-all shadow-xl shadow-emerald-900/10 w-full sm:w-auto">
-                    New Analysis <Upload className="w-6 h-6 text-emerald-600" />
+                  <button onClick={() => setPage('analyze')} className="flex items-center justify-center gap-4 px-14 py-8 rounded-2xl bg-emerald-500/10 backdrop-blur-xl border border-emerald-500/30 text-emerald-400 text-xl font-extrabold hover:bg-emerald-500/20 hover:scale-[1.02] transition-all shadow-xl shadow-emerald-500/20 w-full sm:w-[320px]">
+                    New Analysis <Upload className="w-7 h-7 text-emerald-400" />
                   </button>
                 </div>
               </GlassSurface>

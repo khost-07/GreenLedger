@@ -16,6 +16,7 @@ import { GlassButton } from './components/reactbits/GlassButton';
 import { TiltCard } from './components/reactbits/TiltCard';
 import { GlassIcons } from './components/reactbits/GlassIcons';
 import GlassSurface from './components/reactbits/GlassSurface';
+import LiquidEther from './components/reactbits/LiquidEther';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 import { jsPDF } from 'jspdf';
@@ -247,8 +248,26 @@ export default function App() {
 
   return (
     <div className="min-h-screen relative bg-slate-50 overflow-hidden">
-      {/* Plain gradient background */}
-      <div className="fixed inset-0 z-0 pointer-events-none bg-gradient-to-br from-slate-50 via-emerald-50/30 to-slate-100" />
+      {/* Background Effect */}
+      <div className="fixed inset-0 z-0 opacity-40 mix-blend-multiply pointer-events-none">
+        <LiquidEther
+          colors={['#86efac', '#6ee7b7', '#34d399']}
+          mouseForce={15}
+          cursorSize={120}
+          isViscous
+          viscous={30}
+          iterationsViscous={32}
+          iterationsPoisson={32}
+          resolution={0.5}
+          isBounce={false}
+          autoDemo
+          autoSpeed={0.3}
+          autoIntensity={1.5}
+          takeoverDuration={0.25}
+          autoResumeDelay={3000}
+          autoRampDuration={0.6}
+        />
+      </div>
 
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-white/40 backdrop-blur-xl border-b border-slate-200/50 flex justify-center">

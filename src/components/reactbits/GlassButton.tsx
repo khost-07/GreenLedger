@@ -20,7 +20,7 @@ export function GlassButton({
   
   const variants = {
     dark: "bg-slate-800 text-white shadow-lg shadow-slate-800/20 hover:bg-slate-900 border border-slate-700/50 hover:shadow-xl hover:shadow-slate-800/30",
-    light: "bg-white/70 text-slate-800 backdrop-blur-md shadow-lg shadow-slate-200/50 border border-white hover:bg-white hover:shadow-xl hover:shadow-slate-200/50"
+    light: "bg-black/70 text-slate-100 backdrop-blur-md shadow-lg shadow-black/50 border border-slate-700 hover:bg-slate-900 hover:shadow-xl hover:shadow-black/50"
   };
 
   return (

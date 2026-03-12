@@ -52,7 +52,7 @@ export function TiltCard({ children, className = '', intensity = 15 }: TiltCardP
         rotateY,
         transformStyle: "preserve-3d",
       }}
-      className={`relative w-full h-full rounded-2xl bg-white/60 backdrop-blur-md border border-white shadow-xl shadow-slate-200/50 transition-colors hover:bg-white/80 ${className}`}
+      className={`relative w-full h-full rounded-2xl bg-black/60 backdrop-blur-md border border-slate-700 shadow-xl shadow-black/50 transition-colors hover:bg-black/80 ${className}`}
     >
       {/* Inner subtle gradient border effect */}
       <div 

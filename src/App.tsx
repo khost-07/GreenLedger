@@ -249,11 +249,11 @@ export default function App() {
   return (
     <div className="min-h-screen relative bg-[#060B14] overflow-hidden">
       {/* Background Effect */}
-      <div className="fixed inset-0 z-0 opacity-70 mix-blend-screen pointer-events-none">
+      <div className="fixed inset-0 z-0 opacity-80 mix-blend-screen pointer-events-none">
         <LiquidEther
           colors={['#5227FF', '#FF9FFC', '#B19EEF']}
-          mouseForce={15}
-          cursorSize={120}
+          mouseForce={40}
+          cursorSize={150}
           isViscous
           viscous={30}
           iterationsViscous={32}
@@ -261,10 +261,10 @@ export default function App() {
           resolution={0.5}
           isBounce={false}
           autoDemo
-          autoSpeed={0.3}
-          autoIntensity={1.5}
+          autoSpeed={1.0}
+          autoIntensity={3.5}
           takeoverDuration={0.25}
-          autoResumeDelay={3000}
+          autoResumeDelay={1000}
           autoRampDuration={0.6}
         />
       </div>

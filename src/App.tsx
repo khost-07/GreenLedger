@@ -275,7 +275,8 @@ export default function App() {
         <PillNav 
           logoAlt="GreenLedger Logo"
           activeHref={`#${page}`}
-          baseColor="#ffffff"
+          baseColor="rgba(30, 41, 59, 1)"
+            pillTextColor="#f8fafc"
           pillColor="#10b981"
           hoveredPillTextColor="#060010"
           items={[

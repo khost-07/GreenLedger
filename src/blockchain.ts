@@ -1,13 +1,13 @@
 /**
- * blockchain.ts — ethers.js v6 integration for Polygon Amoy.
+ * blockchain.ts — ethers.js v6 integration for Ethereum Sepolia testnet.
  * Handles MetaMask wallet connection, network switching, on-chain storage, and lookups.
  */
 import { ethers } from 'ethers';
 
-export const AMOY_CHAIN_ID = '0x13882'; // 80002
-export const CONTRACT_ADDRESS = process.env.VITE_CONTRACT_ADDRESS || '0x0000000000000000000000000000000000000000';
+export const SEPOLIA_CHAIN_ID = '0xaa36a7'; // 11155111
+export const CONTRACT_ADDRESS = import.meta.env.VITE_CONTRACT_ADDRESS || '0x0000000000000000000000000000000000000000';
 
-const AMOY_RPC = 'https://rpc-amoy.polygon.technology/';
+const SEPOLIA_RPC = 'https://ethereum-sepolia-rpc.publicnode.com';
 
 const CONTRACT_ABI = [
   'function storeReport(bytes32 docHash, string company, uint256 greenScore, string grade) external',
@@ -33,20 +33,20 @@ export async function getCurrentChainId(): Promise<string> {
   return eth.request({ method: 'eth_chainId' });
 }
 
-export async function switchToAmoy(): Promise<void> {
+export async function switchToSepolia(): Promise<void> {
   const eth = (window as any).ethereum;
   try {
-    await eth.request({ method: 'wallet_switchEthereumChain', params: [{ chainId: AMOY_CHAIN_ID }] });
+    await eth.request({ method: 'wallet_switchEthereumChain', params: [{ chainId: SEPOLIA_CHAIN_ID }] });
   } catch (switchError: any) {
     if (switchError.code === 4902) {
       await eth.request({
         method: 'wallet_addEthereumChain',
         params: [{
-          chainId: AMOY_CHAIN_ID,
-          chainName: 'Polygon Amoy Testnet',
-          nativeCurrency: { name: 'MATIC', symbol: 'MATIC', decimals: 18 },
-          rpcUrls: [AMOY_RPC],
-          blockExplorerUrls: ['https://amoy.polygonscan.com'],
+          chainId: SEPOLIA_CHAIN_ID,
+          chainName: 'Ethereum Sepolia Testnet',
+          nativeCurrency: { name: 'SepoliaETH', symbol: 'ETH', decimals: 18 },
+          rpcUrls: [SEPOLIA_RPC],
+          blockExplorerUrls: ['https://sepolia.etherscan.io'],
         }],
       });
     } else {
@@ -70,7 +70,7 @@ export async function storeReportOnChain(
   hash: string, company: string, score: number, grade: string
 ): Promise<{ txHash: string; txUrl: string }> {
   if (CONTRACT_ADDRESS === '0x0000000000000000000000000000000000000000') {
-    throw new Error('Contract not deployed. Add VITE_CONTRACT_ADDRESS to your .env file.');
+    throw new Error('Contract not deployed. Deploy GreenLedger.sol on Sepolia and add VITE_CONTRACT_ADDRESS to .env');
   }
   const eth = (window as any).ethereum;
   const provider = new ethers.BrowserProvider(eth);
@@ -81,14 +81,14 @@ export async function storeReportOnChain(
   const receipt = await tx.wait();
   return {
     txHash: receipt.hash,
-    txUrl: `https://amoy.polygonscan.com/tx/${receipt.hash}`,
+    txUrl: `https://sepolia.etherscan.io/tx/${receipt.hash}`,
   };
 }
 
 export async function getReportFromChain(hash: string): Promise<any | null> {
   if (CONTRACT_ADDRESS === '0x0000000000000000000000000000000000000000') return null;
   try {
-    const provider = new ethers.JsonRpcProvider(AMOY_RPC);
+    const provider = new ethers.JsonRpcProvider(SEPOLIA_RPC);
     const contract = new ethers.Contract(CONTRACT_ADDRESS, CONTRACT_ABI, provider);
     const bytes32Hash = hexToBytes32(hash);
     const stored = await contract.isStored(bytes32Hash);
